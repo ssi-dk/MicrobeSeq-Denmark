@@ -1,3 +1,5 @@
+WIP currently fake information
+
 # 🧬 MicrobeSeq Denmark 
 
 Welcome to the official landing page for the MicrobeSeq Denmark project. This is the central hub for all repositories related to our research and development.
