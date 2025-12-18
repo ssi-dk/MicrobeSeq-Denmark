@@ -9,3 +9,7 @@ Apologies but this page is still in the works so details aren't available yet bu
 SSI-Seq is supported by co-funding from the European Union’s EU4Health programme under Grant Agreement Nr 101111879. Views and opinions expressed do not necessarily reflect those of the European Union or HaDEA. Neither the European Union nor the granting authority can be held responsible for them.
 
 © 2023 MicrobeSeq Denmark. All rights reserved.
+
+[Landing Zones](https://github.com/ssi-dk/landingzones) - To track and enable data transfers between our multiple servers
+
+[uQCme](https://github.com/ssi-dk/uqcme) - Runs QC rules and visualizes them
