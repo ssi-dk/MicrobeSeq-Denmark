@@ -34,41 +34,6 @@ This list is not exhaustive.
 
 ![alt text](image.png)
 
-```mermaid
-sequenceDiagram
-    title Bioinformatics QC Workflow (High-Level)
-
-    actor User
-    participant WF as Workflow Engine
-    participant Tax as Taxonomic Classification (Kraken2 + Bracken)
-    participant Asm as Assembler (Shovill)
-    participant QC as Assembly QC (QUAST + Contig Check)
-    participant Feat as Feature Detection (AMR, MLST, rMLST, PlasmidFinder)
-    participant Format as Report Formatter (Kraken Style Adjust)
-    participant Agg as Report Aggregator (Bifrost Bridge)
-
-    User ->> WF: Submit paired-end reads
-    WF ->> Tax: Run taxonomic classification
-    Tax -->> WF: Taxonomy report
-
-    WF ->> Asm: Assemble reads
-    Asm -->> WF: Assembly (contigs)
-
-    WF ->> QC: Run assembly quality checks
-    QC -->> WF: QC metrics
-
-    WF ->> Feat: Detect AMR, MLST, plasmids
-    Feat -->> WF: Feature reports
-
-    WF ->> Format: Adjust Kraken report
-    Format -->> WF: Styled taxonomy report
-
-    WF ->> Agg: Combine all outputs
-    Agg -->> WF: Final combined QC report
-
-    WF -->> User: Deliver final QC package
-```
-
 > [Landing Zones](https://github.com/ssi-dk/landingzones)
 >
 > To track and enable data transfers between our multiple servers
