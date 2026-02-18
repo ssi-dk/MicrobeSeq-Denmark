@@ -37,38 +37,36 @@ This list is not exhaustive.
 ```mermaid
 sequenceDiagram
     title Bioinformatics QC Workflow (High-Level)
-    
+
     actor User
-    participant "Workflow Engine" as WF
-    participant "Taxonomic Classification\n(Kraken2 + Bracken)" as Tax
-    participant "Assembler\n(Shovill)" as Asm
-    participant "Assembly QC\n(QUAST + Contig Check)" as QC
-    participant "Feature Detection\n(AMR, MLST, rMLST,\nPlasmidFinder, Ambiguous Sites)" as Feat
-    participant "Report Formatter\n(Kraken Style Adjust)" as Format
-    participant "Report Aggregator\n(Bifrost Bridge)" as Agg
-    
-    User -> WF : Submit paired-end reads
-    WF -> Tax : Run taxonomic classification
-    Tax --> WF : Taxonomy report
-    
-    WF -> Asm : Assemble reads
-    Asm --> WF : Assembly (contigs)
-    
-    WF -> QC : Run assembly quality checks
-    QC --> WF : QC metrics
-    
-    WF -> Feat : Detect AMR, MLST,\nplasmids, ambiguous sites
-    Feat --> WF : Feature reports
-    
-    WF -> Format : Adjust/format Kraken report
-    Format --> WF : Styled taxonomy report
-    
-    WF -> Agg : Combine all outputs
-    Agg --> WF : Final combined QC report
-    
-    WF --> User : Deliver final QC package
+    participant WF as Workflow Engine
+    participant Tax as Taxonomic Classification (Kraken2 + Bracken)
+    participant Asm as Assembler (Shovill)
+    participant QC as Assembly QC (QUAST + Contig Check)
+    participant Feat as Feature Detection (AMR, MLST, rMLST, PlasmidFinder)
+    participant Format as Report Formatter (Kraken Style Adjust)
+    participant Agg as Report Aggregator (Bifrost Bridge)
 
+    User ->> WF: Submit paired-end reads
+    WF ->> Tax: Run taxonomic classification
+    Tax -->> WF: Taxonomy report
 
+    WF ->> Asm: Assemble reads
+    Asm -->> WF: Assembly (contigs)
+
+    WF ->> QC: Run assembly quality checks
+    QC -->> WF: QC metrics
+
+    WF ->> Feat: Detect AMR, MLST, plasmids
+    Feat -->> WF: Feature reports
+
+    WF ->> Format: Adjust Kraken report
+    Format -->> WF: Styled taxonomy report
+
+    WF ->> Agg: Combine all outputs
+    Agg -->> WF: Final combined QC report
+
+    WF -->> User: Deliver final QC package
 ```
 
 > [Landing Zones](https://github.com/ssi-dk/landingzones)
