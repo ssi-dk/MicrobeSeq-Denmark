@@ -30,8 +30,53 @@ This list is not exhaustive.
 
 ## Software
 
-[Landing Zones](https://github.com/ssi-dk/landingzones) - To track and enable data transfers between our multiple servers
+### QC pipeline
 
-[uQCme](https://github.com/ssi-dk/uqcme) - Runs QC rules and visualizes them
+![alt text](image.png)
+
+```mermaid
+sequenceDiagram
+    title Bioinformatics QC Workflow (High-Level)
+    
+    actor User
+    participant "Workflow Engine" as WF
+    participant "Taxonomic Classification\n(Kraken2 + Bracken)" as Tax
+    participant "Assembler\n(Shovill)" as Asm
+    participant "Assembly QC\n(QUAST + Contig Check)" as QC
+    participant "Feature Detection\n(AMR, MLST, rMLST,\nPlasmidFinder, Ambiguous Sites)" as Feat
+    participant "Report Formatter\n(Kraken Style Adjust)" as Format
+    participant "Report Aggregator\n(Bifrost Bridge)" as Agg
+    
+    User -> WF : Submit paired-end reads
+    WF -> Tax : Run taxonomic classification
+    Tax --> WF : Taxonomy report
+    
+    WF -> Asm : Assemble reads
+    Asm --> WF : Assembly (contigs)
+    
+    WF -> QC : Run assembly quality checks
+    QC --> WF : QC metrics
+    
+    WF -> Feat : Detect AMR, MLST,\nplasmids, ambiguous sites
+    Feat --> WF : Feature reports
+    
+    WF -> Format : Adjust/format Kraken report
+    Format --> WF : Styled taxonomy report
+    
+    WF -> Agg : Combine all outputs
+    Agg --> WF : Final combined QC report
+    
+    WF --> User : Deliver final QC package
+
+
+```
+
+> [Landing Zones](https://github.com/ssi-dk/landingzones)
+>
+> To track and enable data transfers between our multiple servers
+
+> [uQCme](https://github.com/ssi-dk/uqcme)
+>
+> Runs QC rules and visualizes them
 
 © 2023 MicrobeSeq Denmark. All rights reserved.
