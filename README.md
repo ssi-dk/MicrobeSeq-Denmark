@@ -30,16 +30,25 @@ This list is not exhaustive.
 
 ## Software
 
+### Sample processing
+
+> uSymph
+> 
+> A custom database, API end points, job runners, and a web interface for chaining automation workflows to process tasks related to WGS surveillance.
+
+> [Landing Zones](https://github.com/ssi-dk/landingzones)
+>
+> Our lab machines are on a different network from our data hub, and our analysis system. We user this to enable data transfers between our multiple servers while ensuring that all connections are tracked through a central file.
+
 ### QC pipeline
 
 ![alt text](image.png)
 
-> [Landing Zones](https://github.com/ssi-dk/landingzones)
->
-> To track and enable data transfers between our multiple servers
+The pipeline describes the steps taken for aquiring the output needed to run our QC metrics and a bunch of extras for the purpose of downstream surveillance.
 
+### QC analysis/report
 > [uQCme](https://github.com/ssi-dk/uqcme)
 >
-> Runs QC rules and visualizes them
+> This program is 2 parts, 1 calculates QC metrics given input files and configuration files. From that it determines if the sample passes or fails QC (other outcomes possible as well) and generates a new file with these additional columns. The new file can then be fed into a web interface to filter and visualize the QC results and do API driven actions against them.
 
 © 2023 MicrobeSeq Denmark. All rights reserved.
