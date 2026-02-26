@@ -40,11 +40,19 @@ This list is not exhaustive.
 >
 > Our lab machines are on a different network from our data hub, and our analysis system. We user this to enable data transfers between our multiple servers while ensuring that all connections are tracked through a central file.
 
+### Notification system
+
+> [ssi_pingme](https://github.com/ssi-dk/ssi_pingme)
+>
+> A simple library intended for use with an API, to provide a common interface for sending notifications to users. The library supports multiple notification channels (e.g. email, webhook (slack/teams)) utilizing adaptive cards for messages.
+
 ### QC pipeline
 
 ![alt text](image.png)
 
-The pipeline describes the steps taken for aquiring the output needed to run our QC metrics and a bunch of extras for the purpose of downstream surveillance.
+The Bifrost QC pipeline is our standardized “front-door” workflow for bacterial whole‑genome sequencing data: it takes raw paired‑end reads and produces a clear, comparable quality summary that helps confirm a sample is usable before deeper, species‑specific analyses. In one run it performs core checks that matter for surveillance and routine genomics—cleaning and summarizing read quality, verifying that the data matches the expected organism (and flagging likely contamination or mix‑ups), generating a draft assembly, and then assessing assembly completeness and consistency. It also adds lightweight “sanity checks” that are informative across organisms, such as counting ambiguous sites and producing basic typing signals that support downstream interpretation.
+
+Just as importantly, the pipeline collects all outputs into a single, structured report (along with the underlying per‑step reports), so results are easy to review, share, and compare across projects and time. Because it relies on widely used, well‑established analysis components (e.g., read QC, taxonomic classification, assembly and assembly metrics, MLST/rMLST typing, AMR marker screening, and plasmid marker screening) and produces consistent tabular outputs, other groups can run the same workflow to generate QC and characterization results that are directly comparable to SSI/Bifrost datasets—supporting harmonized analyses, benchmarking, and collaborative surveillance.
 
 ### QC analysis/report
 > [uQCme](https://github.com/ssi-dk/uqcme)
@@ -52,3 +60,10 @@ The pipeline describes the steps taken for aquiring the output needed to run our
 > This program is 2 parts, 1 calculates QC metrics given input files and configuration files. From that it determines if the sample passes or fails QC (other outcomes possible as well) and generates a new file with these additional columns. The new file can then be fed into a web interface to filter and visualize the QC results and do API driven actions against them.
 
 © 2023 MicrobeSeq Denmark. All rights reserved.
+
+### Species specific pipelines
+> [SSI Analysis utility](https://github.com/ssi-dk/ssi_analysis_utility)
+>
+> SSI Analysis Utility is Statens Serum Institute’s modular, reproducible pipeline for bacterial isolate characterization, developed as part of the MicrobeSeq Denmark project to support standardized genome-sequencing analysis in national surveillance. In practice, it provides a consistent way to convert sequencing data into comparable characterization outputs—such as antimicrobial resistance profiling, strain/sequence typing, and detection of virulence-associated markers—using a transparent, scalable workflow that can be applied across many samples.  ￼
+>
+> A key feature is that the pipeline is species-specific: the same framework runs tailored analysis “recipes” for priority pathogens including C. difficile, E. faecalis, E. faecium, E. coli, K. pneumoniae, N. meningitidis, S. aureus and S. enterica. Each organism is analysed with the most appropriate modules (for example, dedicated support for C. difficile toxin/repeat-focused characterization, meningococcal fine typing, S. aureus spa typing, and Salmonella serotyping). At the same time, SSI Analysis Utility is designed so results remain consistent and reproducible because the underlying tools and curated reference databases are managed in controlled, versioned setups—making it straightforward for other laboratories to adopt the same software and generate outputs that are directly comparable to SSI/MicrobeSeq Denmark datasets for downstream analysis and surveillance.
